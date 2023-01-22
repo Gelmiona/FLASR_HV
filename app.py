@@ -1,6 +1,7 @@
 import random
 from flask import Flask, request
 
+# TODO: добавьте .gitignore в проект
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
 ret = [1, 2, 3, 4, 5]
@@ -28,6 +29,8 @@ quotes = [
         "author": "Yoggi Berra",
         "text": "В теории, теория и практика неразделимы. На практике это не так.",
         'rating': '***'
+        # TODO: Хранить рейтинг в виде звездочек не рационально
+        #  "Звездочки" - это отображение рейтинга, храните в виде целого числа.
     },
 ]
 
@@ -41,6 +44,7 @@ def get_all():
 
 @app.route("/quotes/count", methods=["GET"])
 def quote_counts():
+    # TODO: формат возвращаемого значения не соответствует формату задания
     return f'"count": {len(quotes)}'
 
 @app.route("/quotes")
@@ -56,6 +60,7 @@ def random_quote():
     return random.choice(quotes)
 
 
+# TODO: А эта функция, это какое задание?
 @app.route("/quotes_numbers")
 def get_quote_by_numbers():
     last_id = quotes[-1]["id"]
@@ -107,6 +112,7 @@ def filter():
             elif k == 'rating':
                 if i['rating'] == v:
                     res.append(i['text'])
+    # TODO: если цитаты с указанными параметрами не найдены, принято возвращать пустой список, а не 404
     if res:
         return res
     return f"Quote parametrs not find.", 200
@@ -116,11 +122,13 @@ def filter():
 def filter2():
     args = request.args
     res=[]
+    # TODO: очень плохое именование переменных(i, v, v1...), код становится сложно читаемым и непонятным. Переименуйте.
     for i in quotes:
         for k,v in i.items():
             for v1 in args.values():
                 if v==v1:
                     res.append(i)
+    # TODO: тут, как и в предыдущей функции, возвращаем пустой список, если нет подходящих  под фильтр цитат
     if res:
         return res
     return f"Quote parametrs not find.", 200

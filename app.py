@@ -10,25 +10,25 @@ quotes = [
         "id": 1,
         "author": "Rick Cook",
         "text": "Программирование сегодня — это гонка разработчиков программ, стремящихся писать программы с большей и лучшей идиотоустойчивостью, и вселенной, которая пытается создать больше отборных идиотов. Пока вселенная побеждает.",
-        'rating': '*****'
+        'rating': '5'
     },
     {
         "id": 2,
         "author": "Waldi Ravens",
         "text": "Программирование на С похоже на быстрые танцы на только что отполированном полу людей с острыми бритвами в руках.",
-        'rating': '*'
+        'rating': '1'
     },
     {
         "id": 3,
         "author": "Mosher’s Law of Software Engineering",
         "text": "Не волнуйтесь, если что-то не работает. Если бы всё работало, вас бы уволили.",
-        'rating': '**'
+        'rating': '2'
     },
     {
         "id": 4,
         "author": "Yoggi Berra",
         "text": "В теории, теория и практика неразделимы. На практике это не так.",
-        'rating': '***'
+        'rating': '3'
         # TODO: Хранить рейтинг в виде звездочек не рационально
         #  "Звездочки" - это отображение рейтинга, храните в виде целого числа.
     },
@@ -44,8 +44,10 @@ def get_all():
 
 @app.route("/quotes/count", methods=["GET"])
 def quote_counts():
-    # TODO: формат возвращаемого значения не соответствует формату задания
-    return f'"count": {len(quotes)}'
+    # TODO: формат возвращаемого значения поправлен в соответствии с заданием
+    {
+        "count": len(quotes)
+    }
 
 @app.route("/quotes")
 def get_quotes():
@@ -60,7 +62,8 @@ def random_quote():
     return random.choice(quotes)
 
 
-# TODO: А эта функция, это какое задание?
+# TODO: функция к 1 практике по данной рекомендации:
+#Реализуйте отдельную функцию, возвращающую новый уникальный id для цитаты. Логика работы простая: берем id последней цитаты в списке и +1
 @app.route("/quotes_numbers")
 def get_quote_by_numbers():
     last_id = quotes[-1]["id"]
@@ -113,25 +116,24 @@ def filter():
                 if i['rating'] == v:
                     res.append(i['text'])
     # TODO: если цитаты с указанными параметрами не найдены, принято возвращать пустой список, а не 404
-    if res:
-        return res
-    return f"Quote parametrs not find.", 200
+    
+    return res, 200
+   
 
 #поиск по заданному диапазану рейтинга
 @app.route("/quotes/filter2", methods=['GET'])
 def filter2():
     args = request.args
     res=[]
-    # TODO: очень плохое именование переменных(i, v, v1...), код становится сложно читаемым и непонятным. Переименуйте.
-    for i in quotes:
-        for k,v in i.items():
-            for v1 in args.values():
-                if v==v1:
-                    res.append(i)
-    # TODO: тут, как и в предыдущей функции, возвращаем пустой список, если нет подходящих  под фильтр цитат
-    if res:
-        return res
-    return f"Quote parametrs not find.", 200
+    # TODO: переменные(i, v, v1...) переименованы.
+    for quote in quotes:
+        for key,value in quote.items():
+            for value_args in args.values():
+                if value==value_args:
+                    res.append(quote)
+    # TODO: возвращаем пустой список, если нет подходящих  под фильтр цитат
+ 
+    return res, 200
 
 # удаление элемента
 @app.route("/quotes/<int:id>", methods=['DELETE'])

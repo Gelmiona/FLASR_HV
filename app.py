@@ -10,25 +10,25 @@ quotes = [
         "id": 1,
         "author": "Rick Cook",
         "text": "Программирование сегодня — это гонка разработчиков программ, стремящихся писать программы с большей и лучшей идиотоустойчивостью, и вселенной, которая пытается создать больше отборных идиотов. Пока вселенная побеждает.",
-        'rating': '5'
+        'rating': 5
     },
     {
         "id": 2,
         "author": "Waldi Ravens",
         "text": "Программирование на С похоже на быстрые танцы на только что отполированном полу людей с острыми бритвами в руках.",
-        'rating': '1'
+        'rating': 1
     },
     {
         "id": 3,
         "author": "Mosher’s Law of Software Engineering",
         "text": "Не волнуйтесь, если что-то не работает. Если бы всё работало, вас бы уволили.",
-        'rating': '2'
+        'rating': 2
     },
     {
         "id": 4,
         "author": "Yoggi Berra",
         "text": "В теории, теория и практика неразделимы. На практике это не так.",
-        'rating': '3'
+        'rating': 3
         # TODO: Хранить рейтинг в виде звездочек не рационально
         #  "Звездочки" - это отображение рейтинга, храните в виде целого числа.
     },
@@ -96,8 +96,8 @@ def create_quote():
     new_quote = request.json
     #last_id = quotes[-1]["id"]
     new_quote["id"] = int(get_quote_by_numbers())
-    if 'rating' not in new_quote or len(new_quote['rating'])> 5:
-        new_quote['rating'] = ret[0]*'*'
+    if 'rating' not in new_quote or new_quote['rating']> 5:
+        new_quote['rating'] = 1
     quotes.append(new_quote)
     return new_quote, 201
 

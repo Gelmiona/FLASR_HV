@@ -1,7 +1,7 @@
 import random
 from flask import Flask, request
 
-# TODO: добавьте .gitignore в проект
+
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
 ret = [1, 2, 3, 4, 5]
@@ -29,8 +29,8 @@ quotes = [
         "author": "Yoggi Berra",
         "text": "В теории, теория и практика неразделимы. На практике это не так.",
         'rating': 3
-        # TODO: Хранить рейтинг в виде звездочек не рационально
-        #  "Звездочки" - это отображение рейтинга, храните в виде целого числа.
+        #
+        #  "Звездочки" - теперь целые числа.
     },
 ]
 

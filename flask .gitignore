@@ -1,1 +1,7 @@
 
+v_f/bin
+v_f/include
+v_f/lib
+v_f/lib64
+v_f/share
+v_f/pyvenv.cfg

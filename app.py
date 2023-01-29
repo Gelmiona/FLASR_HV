@@ -1,7 +1,7 @@
 import random
 from flask import Flask, request
 
-
+# TODO: нормальный .gitignore в проект так и не добавлен
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
 ret = [1, 2, 3, 4, 5]
@@ -64,6 +64,7 @@ def random_quote():
 
 # TODO: функция к 1 практике по данной рекомендации:
 #Реализуйте отдельную функцию, возвращающую новый уникальный id для цитаты. Логика работы простая: берем id последней цитаты в списке и +1
+# Так нужно просто отдельную функцию сделать, зачем из нее делать отдельный обработчик?
 @app.route("/quotes_numbers")
 def get_quote_by_numbers():
     last_id = quotes[-1]["id"]
